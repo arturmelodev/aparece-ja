@@ -5,6 +5,7 @@ import UserController from './controllers/UserController'
 const routes = Router()
 
 //#region Users
+routes.get('/users', UserController.index)
 routes.post('/user', UserController.store)
 routes.post('/authenticate', UserController.authenticate)
 //#endregion

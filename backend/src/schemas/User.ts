@@ -5,7 +5,7 @@ interface UserInterface extends Document{
     firstName: string,
     lastName: string,
     cpf: string,
-    password: string
+    password: string,
 }
 
 const UserSchema = new Schema({
@@ -26,7 +26,7 @@ const UserSchema = new Schema({
         type: String,
         required: true,
         select: false,
-    }
+    },
 }, {
     timestamps: true
 })

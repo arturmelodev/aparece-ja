@@ -7,7 +7,7 @@ import authConfig from '../config/auth.json'
 
 class UserController {
     public async index(req: Request, res: Response): Promise<Response> {
-        const users = await User.find()
+        const users = await User.find().select('+password')
 
         return res.json(users)
     }
@@ -21,8 +21,12 @@ class UserController {
 
             const user = await User.create(req.body)
 
+            const token = jwt.sign({ id: user.id }, authConfig.secret, {
+                expiresIn: 86400
+            })
+
             user.password = undefined
-            return res.json(user)
+            return res.send({user, token})
         } catch (error) {
             return res.status(400).send({ error: 'Registration failed' });
         }
